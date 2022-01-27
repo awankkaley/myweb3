@@ -4,6 +4,7 @@ import { Menu, Layout, Dropdown, Button } from 'antd';
 import { useRouter } from 'next/router';
 import Account from './Account';
 import { useMoralis } from 'react-moralis';
+import MoralisType from "moralis";
 
 const HeaderPanel = () => {
     const { Header } = Layout;
@@ -15,7 +16,7 @@ const HeaderPanel = () => {
     useEffect(() => {
         const connectorId = window.localStorage.getItem("connectorId");
         if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)
-            enableWeb3({ provider: connectorId });
+            enableWeb3({ provider: connectorId as MoralisType.Web3ProviderType });
         // eslint-disable-next-line react-hooks/exhaustive-depsÍ
     }, [isAuthenticated, isWeb3Enabled]);
 

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Text from "antd/lib/typography/Text";
 import { useMoralis } from 'react-moralis';
 import { connectors } from 'components/config';
+import MoralisType from "moralis";
 
 const Account = () => {
     const { Header } = Layout;
@@ -50,7 +51,7 @@ const Account = () => {
                             key={key}
                             onClick={async () => {
                                 try {
-                                    await authenticate({ provider: connectorId });
+                                    await authenticate({ provider: connectorId as MoralisType.Web3ProviderType });
                                     window.localStorage.setItem("connectorId", connectorId);
                                     setIsAuthModalVisible(false);
                                 } catch (e) {
