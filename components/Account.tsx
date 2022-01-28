@@ -1,13 +1,16 @@
 import React, { useState, useLayoutEffect } from 'react';
-import { Modal, Layout, Dropdown, Button } from 'antd';
+// import { Modal, Layout, Dropdown, Button } from 'antd';
 import { useRouter } from 'next/router';
-import Text from "antd/lib/typography/Text";
+// import Text from "antd/lib/typography/Text";
 import { useMoralis } from 'react-moralis';
 import { connectors } from 'components/config';
 import MoralisType from "moralis";
+import { Button, Dialog, Tooltip, Typography } from '@mui/material';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import Modal from '@mui/material/Modal';
 
 const Account = () => {
-    const { Header } = Layout;
+    // const { Header } = Layout;
     const router = useRouter();
     const { authenticate, isAuthenticated, account, chainId, logout } = useMoralis();
     const [isAuthModalVisible, setIsAuthModalVisible] = useState<boolean>();
@@ -15,56 +18,72 @@ const Account = () => {
         <div>
             {!isAuthenticated ?
                 <>
-                    <Button style={{ margin: 20 }} onClick={() => setIsAuthModalVisible(true)} type="primary" htmlType="submit" >
-                        Connect Wallet
-                    </Button>
+                    <Tooltip title="Open settings">
+                        <div onClick={() => setIsAuthModalVisible(true)}>
+                            <AccountBalanceWalletIcon fontSize='large' />
+                        </div>
+                    </Tooltip>
+                    <Dialog
+                        open={isAuthModalVisible}
+                        title='Connect Wallet'
+                        onClose={() => setIsAuthModalVisible(false)}
+                        sx={{ fontSize: "16px", fontWeight: "500" }}
+                    >
+                        <div style={{ paddingTop: "10px", display: "flex", justifyContent: "center", fontWeight: "700", fontSize: "20px" }}>
+                            Connect Wallet
+                        </div>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", margin: 20 }}>
+                            {connectors.map(({ title, icon, connectorId }, key) => (
+                                <div
+                                    style={styles.connector}
+                                    key={key}
+                                    onClick={async () => {
+                                        try {
+                                            await authenticate({ provider: connectorId as MoralisType.Web3ProviderType });
+                                            window.localStorage.setItem("connectorId", connectorId);
+                                            setIsAuthModalVisible(false);
+                                        } catch (e) {
+                                            console.error(e);
+                                        }
+                                    }}
+                                >
+                                    <img src={icon} alt={title} style={styles.icon} />
+                                    <Typography style={{ fontSize: "14px" }}>{title}</Typography>
+                                </div>
+                            ))}
+                        </div>
+                    </Dialog>
                 </> :
                 <>
-                    <Button style={{ margin: 20 }} onClick={async () => {
-                        await logout();
-                        window.localStorage.removeItem("connectorId");
-                    }} type="primary" htmlType="submit" >
-                        Disconeect
-                    </Button>
+                    <Tooltip title="Open settings">
+                        <div onClick={() => setIsAuthModalVisible(true)}>
+                            <AccountBalanceWalletIcon fontSize='large' />
+                        </div>
+                    </Tooltip>
+                    <Dialog
+                        open={isAuthModalVisible}
+                        title='Connect Wallet'
+                        onClose={() => setIsAuthModalVisible(false)}
+                        sx={{ fontSize: "16px", fontWeight: "500" }}
+                    >
+                        <div style={{ paddingTop: "10px", display: "flex", justifyContent: "center", fontWeight: "700", fontSize: "20px" }}>
+                            Connect Wallet
+                        </div>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", margin: 20 }}>
+                            <Typography style={{ fontSize: "14px" }}>{account}</Typography>
+                            <Button  onClick={async () => {
+                                await logout();
+                                window.localStorage.removeItem("connectorId");
+                            }}  >
+                                Disconeect
+                            </Button>
+                        </div>
+                    </Dialog>
+
                 </>
             }
 
-            <Modal
-                visible={isAuthModalVisible}
-                footer={null}
-                onCancel={() => setIsAuthModalVisible(false)}
-                bodyStyle={{
-                    padding: "15px",
-                    fontSize: "17px",
-                    fontWeight: "500",
-                }}
-                style={{ fontSize: "16px", fontWeight: "500" }}
-                width="340px"
-            >
-                <div style={{ padding: "10px", display: "flex", justifyContent: "center", fontWeight: "700", fontSize: "20px" }}>
-                    Connect Wallet
-                </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-                    {connectors.map(({ title, icon, connectorId }, key) => (
-                        <div
-                            style={styles.connector}
-                            key={key}
-                            onClick={async () => {
-                                try {
-                                    await authenticate({ provider: connectorId as MoralisType.Web3ProviderType });
-                                    window.localStorage.setItem("connectorId", connectorId);
-                                    setIsAuthModalVisible(false);
-                                } catch (e) {
-                                    console.error(e);
-                                }
-                            }}
-                        >
-                            <img src={icon} alt={title} style={styles.icon} />
-                            <Text style={{ fontSize: "14px" }}>{title}</Text>
-                        </div>
-                    ))}
-                </div>
-            </Modal>
+
         </div>
     );
 };
