@@ -3,31 +3,20 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useMoralis } from 'react-moralis';
 import MoralisType from "moralis";
-import { AppBar, Box, Container, Toolbar, Typography, IconButton, Menu, Button, Tooltip, Avatar, MenuItem } from '@mui/material';
+import { AppBar, Box, Container, Toolbar, Typography, IconButton, Menu, Button, Tooltip, Avatar, MenuItem, List, ListItem, ListItemIcon, Divider, ListItemText, Drawer } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
+import ManageSearchOutlinedIcon from '@mui/icons-material/ManageSearchOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import Account from './Account';
 
 const HeaderPanel = () => {
+
     const router = useRouter();
     const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } =
         useMoralis();
-    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+    const [drawer, setDrawer] = React.useState<boolean>(false);
 
     useEffect(() => {
         const connectorId = window.localStorage.getItem("connectorId");
@@ -54,40 +43,11 @@ const HeaderPanel = () => {
                                 aria-label="account of current user"
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"
-                                onClick={handleOpenNavMenu}
+                                onClick={() => setDrawer(true)}
                                 color="inherit"
                             >
                                 <MenuIcon />
                             </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorElNav}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}
-                                open={Boolean(anchorElNav)}
-                                onClose={handleCloseNavMenu}
-                                sx={{
-                                    display: { xs: 'block', md: 'none' },
-                                }}
-                            >
-                                <MenuItem key={1} onClick={() => router.push("/")}
-                                >
-                                    <Typography textAlign="center">Home</Typography>
-                                </MenuItem>
-                                <MenuItem key={2} onClick={() => router.push("/explore")}>
-                                    <Typography textAlign="center">Explore</Typography>
-                                </MenuItem>
-                                <MenuItem key={3} onClick={() => router.push("/mynft")}>
-                                    <Typography textAlign="center">My NFT</Typography>
-                                </MenuItem>
-                            </Menu>
                         </Box>
                         <Typography
                             variant="h6"
@@ -124,29 +84,59 @@ const HeaderPanel = () => {
                     </Toolbar>
                 </Container>
             </AppBar>
-            {/* <Header style={styles.header}  >
-                <div style={{ margin: "20px", }}>
-                    <Typography.Title level={3}>NFTku.</Typography.Title>
-                </div>
-                <Menu
-                    theme="light"
-                    mode="horizontal"
-                    style={styles.menu}
-                    defaultSelectedKeys={[router.pathname]}
+            <Drawer
+                anchor="left"
+                open={drawer}
+                sx={{
+                    display: { xs: 'block', md: 'none' },
+                }}
+                onClose={() => setDrawer(false)}
+            >
+
+                <Box
+                    sx={{ width: 250 }}
+                    role="presentation"
+                    onClick={() => setDrawer(false)}
+                    onKeyDown={() => setDrawer(false)}
                 >
-                    <Menu.Item key="/">
-                        <a >Home</a>
-                    </Menu.Item>
-                    <Menu.Item key="/explore">
-                        <a >Explore</a>
-                    </Menu.Item>
-                    <Menu.Item key="/assets">
-                        <a >My NFT's</a>
-                    </Menu.Item>
-                </Menu>
-                <div style={styles.headerRight}>
-                </div>
-            </Header> */}
+                    <Typography
+                        align='center'
+                        margin={2}
+                        variant="h6">
+                        more.
+                    </Typography>
+                    <Divider />
+                    <List>
+                        <ListItem onClick={() => router.push("/")} button key={"Home"}>
+                            <ListItemIcon>
+                                <HomeOutlinedIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={"Home"} />
+                        </ListItem>
+                        <ListItem onClick={() => router.push("/explore")} button key={"Explore"}>
+                            <ListItemIcon>
+                                <ManageSearchOutlinedIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={"Explore"} />
+                        </ListItem>
+                        <ListItem onClick={() => router.push("/mynft")} button key={"MyNft"}>
+                            <ListItemIcon>
+                                <Inventory2OutlinedIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={"MyNft"} />
+                        </ListItem>
+                    </List>
+                    <Divider />
+                    <List>
+                        <ListItem button key={"Profile"}>
+                            <ListItemIcon>
+                                <PersonOutlineOutlinedIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={"Profile"} />
+                        </ListItem>
+                    </List>
+                </Box>
+            </Drawer>
 
         </div>
     );

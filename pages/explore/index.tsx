@@ -46,7 +46,7 @@ const Explore = observer(() => {
                 <Container style={{ minHeight: '100vh', marginTop: 100 }}>
                     <Grid container spacing={2}>
                         {data.map(({ title, code, price, imgUrl }, key) => (
-                            <Grid item lg={3} xs={6}>
+                            <Grid key={key} item lg={3} xs={6}>
                                 <CardItem title={title} price={price+" ETH"} code={code} imgUrl={imgUrl} />
                             </Grid>
                         ))}

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useMoralis } from 'react-moralis';
 import { connectors } from 'components/config';
 import MoralisType from "moralis";
-import { Button, Dialog, Tooltip, Typography } from '@mui/material';
+import { Button, Card, CardActionArea, CardActions, CardContent, Dialog, Divider, Tooltip, Typography } from '@mui/material';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import Modal from '@mui/material/Modal';
 
@@ -66,16 +66,30 @@ const Account = () => {
                         onClose={() => setIsAuthModalVisible(false)}
                         sx={{ fontSize: "16px", fontWeight: "500" }}
                     >
-                        <div style={{ paddingTop: "10px", display: "flex", justifyContent: "center", fontWeight: "700", fontSize: "20px" }}>
-                            Connect Wallet
+                        <div style={{ padding: "10px", textAlign: "center", fontWeight: "700", fontSize: "20px" }}>
+                            Connected
+                            <Typography style={{ fontSize: "12px" }}>{account}</Typography>
                         </div>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", margin: 20 }}>
-                            <Typography style={{ fontSize: "14px" }}>{account}</Typography>
-                            <Button  onClick={async () => {
+                        <Divider />
+                        <div style={{ padding: "10px", textAlign: "center" }}>
+                            <Card sx={{ minWidth: 275, textAlign: 'center' , marginBottom:3}}>
+                                <CardContent>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Total Balance
+                                    </Typography>
+                                    <Typography fontWeight={700} fontSize={20} >
+                                        100 ETH
+                                    </Typography>
+                                </CardContent>
+                                <CardActionArea >
+                                    <Button size="small">Add Funds</Button>
+                                </CardActionArea>
+                            </Card>
+                            <Button sx={{marginBottom:3}} variant='contained' onClick={async () => {
                                 await logout();
                                 window.localStorage.removeItem("connectorId");
                             }}  >
-                                Disconeect
+                                Logout
                             </Button>
                         </div>
                     </Dialog>
