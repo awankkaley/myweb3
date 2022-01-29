@@ -13,7 +13,7 @@ const Account = () => {
     // const { Header } = Layout;
     const router = useRouter();
     const { authenticate, isAuthenticated, account, chainId, logout } = useMoralis();
-    const [isAuthModalVisible, setIsAuthModalVisible] = useState<boolean>();
+    const [isAuthModalVisible, setIsAuthModalVisible] = useState<boolean>(false);
     return (
         <div>
             {!isAuthenticated ?

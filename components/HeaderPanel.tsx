@@ -38,7 +38,7 @@ const HeaderPanel = () => {
 
     return (
         <div>
-            <AppBar style={styles.header} position='static'>
+            <AppBar style={styles.header} elevation={0} position='fixed'>
                 <Container maxWidth='xl'>
                     <Toolbar disableGutters>
                         <Typography
@@ -77,13 +77,14 @@ const HeaderPanel = () => {
                                     display: { xs: 'block', md: 'none' },
                                 }}
                             >
-                                <MenuItem key={1} onClick={handleCloseNavMenu}>
+                                <MenuItem key={1} onClick={() => router.push("/")}
+                                >
                                     <Typography textAlign="center">Home</Typography>
                                 </MenuItem>
-                                <MenuItem key={1} onClick={handleCloseNavMenu}>
+                                <MenuItem key={2} onClick={() => router.push("/explore")}>
                                     <Typography textAlign="center">Explore</Typography>
                                 </MenuItem>
-                                <MenuItem key={1} onClick={handleCloseNavMenu}>
+                                <MenuItem key={3} onClick={() => router.push("/mynft")}>
                                     <Typography textAlign="center">My NFT</Typography>
                                 </MenuItem>
                             </Menu>
@@ -99,19 +100,19 @@ const HeaderPanel = () => {
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: "center" }}>
                             <Button
                                 key={1}
-                                onClick={handleCloseNavMenu}
+                                onClick={() => router.push("/")}
                                 sx={{ my: 2, color: 'black', display: 'block', fontSize: 18 }}>
                                 Home
                             </Button>
                             <Button
                                 key={2}
-                                onClick={handleCloseNavMenu}
+                                onClick={() => router.push("/explore")}
                                 sx={{ my: 2, color: 'black', display: 'block', fontSize: 18 }}>
                                 Explore
                             </Button>
                             <Button
                                 key={3}
-                                onClick={handleCloseNavMenu}
+                                onClick={() => router.push("/mynft")}
                                 sx={{ my: 2, color: 'black', display: 'block', fontSize: 18 }}>
                                 My NFT
                             </Button>
