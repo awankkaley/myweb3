@@ -6,7 +6,7 @@ import { useMoralis } from 'react-moralis';
 import { connectors } from 'components/config';
 import MoralisType from "moralis";
 import { Button, Dialog, Tooltip, Typography } from '@mui/material';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import Modal from '@mui/material/Modal';
 
 const Account = () => {
@@ -20,7 +20,7 @@ const Account = () => {
                 <>
                     <Tooltip title="Open settings">
                         <div onClick={() => setIsAuthModalVisible(true)}>
-                            <AccountBalanceWalletIcon fontSize='large' />
+                            <AccountBalanceWalletOutlinedIcon fontSize='medium' />
                         </div>
                     </Tooltip>
                     <Dialog
@@ -57,7 +57,7 @@ const Account = () => {
                 <>
                     <Tooltip title="Open settings">
                         <div onClick={() => setIsAuthModalVisible(true)}>
-                            <AccountBalanceWalletIcon fontSize='large' />
+                            <AccountBalanceWalletOutlinedIcon fontSize='medium' />
                         </div>
                     </Tooltip>
                     <Dialog

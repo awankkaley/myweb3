@@ -46,7 +46,7 @@ const HeaderPanel = () => {
                             noWrap
                             component="div"
                             sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontWeight: 700 }}>
-                            NFTKu.
+                            more.
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
@@ -95,7 +95,7 @@ const HeaderPanel = () => {
                             component="div"
                             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
                         >
-                            NFTku.
+                            more.
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: "center" }}>
                             <Button

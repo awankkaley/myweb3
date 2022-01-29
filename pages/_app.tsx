@@ -29,7 +29,7 @@ const MyApp = observer(({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <title>NFTKu.</title>
+        <title>More.</title>
         <meta name="description" content="Viaje Admin Panel" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
