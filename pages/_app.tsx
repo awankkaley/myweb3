@@ -9,6 +9,7 @@ import '@fontsource/space-grotesk/300.css';
 import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';
+import { env } from 'process';
 
 
 const theme = createTheme({
@@ -22,8 +23,8 @@ const theme = createTheme({
 });
 
 const MyApp = observer(({ Component, pageProps }: AppProps) => {
-  const APP_ID = "rjoLU9Xzn42YC5WIV7gtQYUkXhFNb3dTavzbIZXF";
-  const SERVER_URL = "https://rdohdza7sr8m.usemoralis.com:2053/server";
+  const APP_ID = "U6c1sWGjNVgPDCsVjGIDOsRydLZ0k3dvaOsDf66U";
+  const SERVER_URL = "https://9fwajutcjusc.usemoralis.com:2053/server";
 
 
   return (

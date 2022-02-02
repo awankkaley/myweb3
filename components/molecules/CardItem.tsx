@@ -5,15 +5,32 @@ import { useRouter } from 'next/router';
 import { useMoralis } from 'react-moralis';
 import { connectors } from 'components/config';
 import MoralisType from "moralis";
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Dialog, Grid, Tooltip, Typography } from '@mui/material';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import Modal from '@mui/material/Modal';
+import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
+import { useStores } from 'stores/mobxStores';
+
+
+
 
 const CardItem = (props) => {
+    const router = useRouter();
+    const { detailStore } = useStores();
+
+
+    const handleToDetail = () => {
+        detailStore.setItem({
+            title: props.title,
+            code: props.code,
+            price: props.price,
+            imgUrl: props.imgUrl
+        });
+        router.push("/detail")
+
+    }
+
     return (
         <div>
             <Card sx={{ maxWidth: 340 }}>
-                <CardActionArea>
+                <CardActionArea onClick={handleToDetail}>
                     <CardMedia
                         component="img"
                         image={props.imgUrl}
@@ -60,40 +77,4 @@ const CardItem = (props) => {
 };
 
 export default CardItem;
-
-const styles = {
-    account: {
-        height: "42px",
-        padding: "0 15px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "fit-content",
-        borderRadius: "12px",
-        backgroundColor: "rgb(244, 244, 244)",
-        cursor: "pointer",
-    },
-    text: {
-        color: "#21BF96",
-    },
-    connector: {
-        alignItems: "center",
-        display: "flex",
-        flexDirection: 'column' as 'column',
-        height: "auto",
-        justifyContent: "center",
-        marginLeft: "auto",
-        marginRight: "auto",
-        padding: "20px 5px",
-        cursor: "pointer",
-    },
-    icon: {
-        alignSelf: "center",
-        fill: "rgb(40, 13, 95)",
-        flexShrink: "0",
-        marginBottom: "8px",
-        height: "30px",
-    },
-};
-
 
