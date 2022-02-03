@@ -5,15 +5,15 @@ import { useRouter } from 'next/router';
 import { useMoralis } from 'react-moralis';
 import { connectors } from 'components/config';
 import MoralisType from "moralis";
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
+import { Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Dialog, Grid, Hidden, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 import { useStores } from 'stores/mobxStores';
-
-
+import ModalCheckout from 'components/ModalCheckout';
 
 
 const CardItem = (props) => {
     const router = useRouter();
-    const { detailStore } = useStores();
+    const { detailStore, modalStore } = useStores();
+    const [isAuthModalVisible, setIsAuthModalVisible] = useState<boolean>(false);
 
 
     const handleToDetail = () => {
@@ -26,6 +26,7 @@ const CardItem = (props) => {
         router.push("/detail")
 
     }
+
 
     return (
         <div>
@@ -60,9 +61,11 @@ const CardItem = (props) => {
                 <CardActions>
                     <Grid container>
                         <Grid item xs={6} sx={{ textAlign: 'left' }}>
-                            <Button size="small" color="primary">
-                                Buy Now
-                            </Button>
+                            <Hidden only={'xs'}>
+                                <Button size="small" onClick={() => setIsAuthModalVisible(true)} color="primary">
+                                    Buy Now
+                                </Button>
+                            </Hidden>
                         </Grid>
                         <Grid item xs={6} sx={{ textAlign: 'right' }}>
                             <Button size="small" color="primary">
@@ -72,6 +75,7 @@ const CardItem = (props) => {
                     </Grid>
                 </CardActions>
             </Card>
+            <ModalCheckout open={isAuthModalVisible} setOpen={() => setIsAuthModalVisible(false)} />
         </div>
     );
 };

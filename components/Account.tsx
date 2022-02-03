@@ -72,7 +72,7 @@ const Account = () => {
                         </div>
                         <Divider />
                         <div style={{ padding: "10px", textAlign: "center" }}>
-                            <Card sx={{ minWidth: 275, textAlign: 'center' , marginBottom:3}}>
+                            <Card  sx={{ minWidth: 275, textAlign: 'center' , marginBottom:3}}>
                                 <CardContent>
                                     <Typography variant="body2" color="text.secondary">
                                         Total Balance

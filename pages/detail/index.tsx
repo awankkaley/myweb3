@@ -8,9 +8,12 @@ import { Accordion, AccordionDetails, AccordionSummary, Button, Card, CardAction
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { useStores } from 'stores/mobxStores';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import ModalCheckout from 'components/ModalCheckout';
+
 
 const Detail = observer(() => {
     const { detailStore } = useStores();
+    const [isAuthModalVisible, setIsAuthModalVisible] = useState<boolean>(false);
 
     return (
         <div >
@@ -51,7 +54,7 @@ const Detail = observer(() => {
                                                     <Typography variant="h5" >
                                                         <b>{detailStore.item.price}</b>
                                                     </Typography>
-                                                    <Button sx={{ marginTop: 1, width: 150 }} variant="contained"><AttachMoneyIcon /> Buy Now</Button>
+                                                    <Button onClick={()=> setIsAuthModalVisible(true)} sx={{ marginTop: 1, width: 150 }} variant="contained"><AttachMoneyIcon /> Buy Now</Button>
                                                 </Grid >
                                             </Grid>
                                         </CardContent>
@@ -184,6 +187,8 @@ const Detail = observer(() => {
                         </Container>
                     </>
                 }
+                <ModalCheckout open={isAuthModalVisible} setOpen={() => setIsAuthModalVisible(false)} />
+
             </main>
         </div>
 

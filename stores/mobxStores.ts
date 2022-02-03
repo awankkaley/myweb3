@@ -1,8 +1,10 @@
 import React from 'react';
 import DetailStore from './detailStore';
+import ModalStore from './modalStore';
 
 export const stores = {
   detailStore: new DetailStore(),
+  modalStore: new ModalStore(),
 };
 
 export const storesContext = React.createContext({

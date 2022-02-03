@@ -4,8 +4,9 @@ import { observer } from 'mobx-react-lite';
 import React, { useState, useLayoutEffect } from 'react';
 
 import HeaderPanel from 'components/HeaderPanel';
-import { Container, Grid } from '@mui/material';
+import { Avatar, Button, Card, CardMedia, Container, Dialog, Divider, Grid, List, ListItem, ListItemAvatar, ListItemText, Modal, Typography } from '@mui/material';
 import CardItem from 'components/molecules/CardItem';
+
 
 const data = [
     {
@@ -45,17 +46,27 @@ const Explore = observer(() => {
                 <HeaderPanel />
                 <Container style={{ minHeight: '100vh', marginTop: 100 }}>
                     <Grid container spacing={2}>
+                        <Grid textAlign={"center"} item lg={12} xs={12}>
+                            <Typography variant="h4"><b>Explore NFTs</b></Typography>
+                        </Grid>
+                    </Grid>
+                    <Divider />
+                    <Grid marginTop={5} container spacing={2}>
                         {data.map(({ title, code, price, imgUrl }, key) => (
-                            <Grid key={key} item lg={3} xs={6}>
-                                <CardItem title={title} price={price+" ETH"} code={code} imgUrl={imgUrl} />
+                            <Grid key={key} item md={3} lg={3} xs={6}>
+                                <CardItem title={title} price={price + " ETH"} code={code} imgUrl={imgUrl} />
                             </Grid>
                         ))}
                     </Grid>
                 </Container>
             </main>
-        </div>
+        </div >
     )
 });
 
 export default Explore;
+
+
+
+
 
