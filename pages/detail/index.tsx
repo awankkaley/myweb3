@@ -185,9 +185,11 @@ const Detail = observer(() => {
                                 </AccordionDetails>
                             </Accordion>
                         </Container>
+                <ModalCheckout data={detailStore.item} open={isAuthModalVisible} setOpen={() => setIsAuthModalVisible(false)} />
+
                     </>
                 }
-                <ModalCheckout open={isAuthModalVisible} setOpen={() => setIsAuthModalVisible(false)} />
+
 
             </main>
         </div>

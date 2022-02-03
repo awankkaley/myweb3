@@ -75,7 +75,9 @@ const CardItem = (props) => {
                     </Grid>
                 </CardActions>
             </Card>
-            <ModalCheckout data={props} open={isAuthModalVisible} setOpen={() => setIsAuthModalVisible(false)} />
+            {props.data && <>
+                <ModalCheckout data={props} open={isAuthModalVisible} setOpen={() => setIsAuthModalVisible(false)} />
+            </>}
         </div>
     );
 };
