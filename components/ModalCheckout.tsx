@@ -34,10 +34,10 @@ const ModalCheckout = (props) => {
                         <List sx={{ bgcolor: 'background.paper' }}>
                             <ListItem alignItems="flex-start">
                                 <ListItemAvatar>
-                                    <Avatar variant='square' alt="Remy Sharp" src="https://lh3.googleusercontent.com/MeLXJuI7bYJfGxdxExonDk4yto5_BTM9rKJQtfTvj_jfHFZnPccfT206MlyHLpIElxFHjHHHSKj4DBJtENhJVgExSs6yyEgOjmRUvA=w316" />
+                                    <Avatar variant='square' alt="Remy Sharp" src={props.data.imgUrl} />
                                 </ListItemAvatar>
                                 <ListItemText
-                                    primary="Nama NFT"
+                                    primary={props.data.title}
                                     secondary={
                                         <React.Fragment>
                                             <Typography
@@ -46,7 +46,7 @@ const ModalCheckout = (props) => {
                                                 variant="body2"
                                                 color="text.primary"
                                             >
-                                                #001
+                                                {props.data.code}
                                             </Typography>
                                         </React.Fragment>
                                     }
@@ -58,7 +58,7 @@ const ModalCheckout = (props) => {
                         <List sx={{ textAlign: 'right', bgcolor: 'background.paper' }}>
                             <ListItem sx={{ textAlign: "right" }} >
                                 <ListItemText
-                                    primary="0.2 ETH"
+                                    primary={props.data.price}
                                     secondary={
                                         <React.Fragment>
                                             <Typography
@@ -67,7 +67,7 @@ const ModalCheckout = (props) => {
                                                 variant="caption"
                                                 color="text.primary"
                                             >
-                                                (120 USD)
+                                                {/* (120 USD) */}
                                             </Typography>
                                         </React.Fragment>
                                     }
@@ -82,8 +82,8 @@ const ModalCheckout = (props) => {
                         <Typography variant="subtitle1"><b>Total</b></Typography>
                     </Grid>
                     <Grid textAlign={"right"} item lg={6} xs={6}>
-                        <Typography variant="subtitle1"><b>0.1 ETH</b></Typography>
-                        <Typography variant="caption"><b>(20 USD)</b></Typography>
+                        <Typography variant="subtitle1"><b>{props.data.price}</b></Typography>
+                        <Typography variant="caption"><b></b></Typography>
                     </Grid>
                 </Grid>
                 <div style={{ padding: "10px", textAlign: "center" }}>
