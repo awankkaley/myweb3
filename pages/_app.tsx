@@ -19,8 +19,28 @@ const theme = createTheme({
     "fontWeightRegular": 400,
     "fontWeightMedium": 500
   },
-  
+
 });
+
+theme.typography.h3 = {
+  fontSize: '1.6rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.8rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '3.0rem',
+  },
+};
+
+theme.typography.h6 = {
+  fontSize: '0.9rem',
+  '@media (min-width:600px)': {
+    fontSize: '1rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.3rem',
+  },
+};
 
 const MyApp = observer(({ Component, pageProps }: AppProps) => {
   const APP_ID = "U6c1sWGjNVgPDCsVjGIDOsRydLZ0k3dvaOsDf66U";

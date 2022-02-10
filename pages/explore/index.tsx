@@ -47,7 +47,7 @@ const Explore = observer(() => {
                 <Container style={{ minHeight: '100vh', marginTop: 100 }}>
                     <Grid container spacing={2}>
                         <Grid textAlign={"center"} item lg={12} xs={12}>
-                            <Typography variant="h4"><b>Explore NFTs</b></Typography>
+                            <Typography variant="h3"><b>Explore NFTs</b></Typography>
                         </Grid>
                     </Grid>
                     <Divider />
