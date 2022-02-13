@@ -8,9 +8,10 @@ import MoralisType from "moralis";
 import { Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Dialog, Grid, Hidden, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 import { useStores } from 'stores/mobxStores';
 import ModalCheckout from 'components/ModalCheckout';
+import ModalSell from 'components/ModalSell';
 
 
-const CardItem = (props) => {
+const MyNftItem = (props) => {
     const router = useRouter();
     const { detailStore, modalStore } = useStores();
     const [isAuthModalVisible, setIsAuthModalVisible] = useState<boolean>(false);
@@ -22,7 +23,7 @@ const CardItem = (props) => {
             code: props.code,
             price: props.price,
             imgUrl: props.imgUrl,
-            myOwn: false
+            myOwn : true
         });
         router.push("/detail")
 
@@ -41,19 +42,13 @@ const CardItem = (props) => {
                     <CardContent>
                         <Grid container marginBottom={0}>
                             <Grid item xs={6} sx={{ textAlign: 'left' }}>
-                                <Typography gutterBottom variant="body2" >
+                                <Typography variant="body2" >
                                     {props.title}
                                 </Typography>
-                                <Typography variant="caption" color="text.secondary">
-                                    {props.code}
-                                </Typography>
                             </Grid>
-                            <Grid item xs={6} sx={{ textAlign: 'right' }} >
-                                <Typography gutterBottom variant="caption" color="text.secondary">
-                                    Price
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    {props.price}
+                            <Grid item xs={6} sx={{ textAlign: 'right' }}>
+                                <Typography variant="body2">
+                                    {props.code}
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -61,25 +56,20 @@ const CardItem = (props) => {
                 </CardActionArea>
                 <CardActions>
                     <Grid container>
-                        <Grid item xs={6} sx={{ textAlign: 'left' }}>
+                        <Grid item xs={12} sx={{ textAlign: 'center' }}>
                             <Hidden only={'xs'}>
-                                <Button size="small" onClick={() => setIsAuthModalVisible(true)} color="primary">
-                                    Buy Now
+                                <Button size="medium" onClick={() => setIsAuthModalVisible(true)} color="primary">
+                                    Sell Item
                                 </Button>
                             </Hidden>
-                        </Grid>
-                        <Grid item xs={6} sx={{ textAlign: 'right' }}>
-                            <Button size="small" color="primary">
-                                Share
-                            </Button>
                         </Grid>
                     </Grid>
                 </CardActions>
             </Card>
-            <ModalCheckout data={props} open={isAuthModalVisible} setOpen={() => setIsAuthModalVisible(false)} />
+            <ModalSell data={props} open={isAuthModalVisible} setOpen={() => setIsAuthModalVisible(false)} />
         </div>
     );
 };
 
-export default CardItem;
+export default MyNftItem;
 

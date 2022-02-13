@@ -48,13 +48,20 @@ const Detail = observer(() => {
                                                 </Grid>
 
                                                 <Grid item lg={6} xs={12} >
-                                                    {/* <Typography variant="caption" >
-                                                        Current Price
-                                                    </Typography> */}
-                                                    <Typography variant="h5" >
-                                                        <b>{detailStore.item.price}</b>
-                                                    </Typography>
-                                                    <Button onClick={()=> setIsAuthModalVisible(true)} sx={{ marginTop: 1, width: 150 }} variant="contained"><AttachMoneyIcon /> Buy Now</Button>
+                                                    {detailStore.item.myOwn ?
+                                                        <>
+                                                            <Button onClick={() => setIsAuthModalVisible(true)} sx={{ marginTop: 1, width: 150 }} variant="outlined"><AttachMoneyIcon /> Sell Item</Button>
+
+                                                        </> :
+                                                        <>
+                                                            <Typography variant="caption" >
+                                                                Current Price
+                                                            </Typography>
+                                                            <Typography variant="h5" >
+                                                                <b>{detailStore.item.price}</b>
+                                                            </Typography>
+                                                            <Button onClick={() => setIsAuthModalVisible(true)} sx={{ marginTop: 1, width: 150 }} variant="contained"><AttachMoneyIcon /> Buy Now</Button>
+                                                        </>}
                                                 </Grid >
                                             </Grid>
                                         </CardContent>
@@ -185,7 +192,7 @@ const Detail = observer(() => {
                                 </AccordionDetails>
                             </Accordion>
                         </Container>
-                <ModalCheckout data={detailStore.item} open={isAuthModalVisible} setOpen={() => setIsAuthModalVisible(false)} />
+                        <ModalCheckout data={detailStore.item} open={isAuthModalVisible} setOpen={() => setIsAuthModalVisible(false)} />
 
                     </>
                 }
