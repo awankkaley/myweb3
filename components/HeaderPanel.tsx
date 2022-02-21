@@ -33,6 +33,7 @@ const HeaderPanel = () => {
                         <Typography
                             variant="h4"
                             noWrap
+                            onClick={()=> router.push('/')}
                             component="div"
                             sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontWeight: 700 }}>
                             more.
@@ -52,6 +53,7 @@ const HeaderPanel = () => {
                         <Typography
                             variant="h6"
                             noWrap
+                            onClick={()=> router.push('/')}
                             component="div"
                             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, fontWeight: 700 }}
                         >
@@ -102,6 +104,7 @@ const HeaderPanel = () => {
                     <Typography
                         align='center'
                         margin={2}
+                        onClick={()=> router.push('/')}
                         variant="h6">
                         more.
                     </Typography>
