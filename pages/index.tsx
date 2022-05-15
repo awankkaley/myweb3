@@ -49,22 +49,22 @@ const Home: NextPage = observer(() => {
       <main >
         <HeaderPanel />
         <Container style={{ minHeight: '100vh', marginTop: 100 }}>
-          <Grid container marginTop={20} marginBottom={0} >
+          <Grid container marginTop={2} marginBottom={0} >
             <Grid item lg={12} xs={12} textAlign="center" >
               <Typography variant="h3"><b>Discover, collect, and sell <br />extraordinary  NFTs</b></Typography>
-              <Typography variant="h6">OpenSea is the world's first and largest NFT marketplace</Typography>
+              <Typography variant="h6">More is the world's first and largest NFT marketplace</Typography>
               <Button sx={{ marginTop: 3 }} variant='contained' size='large' onClick={() => router.push("/explore")}>
                 <ExploreIcon /> Explore
               </Button>
             </Grid>
           </Grid>
-          <Divider sx={{ marginTop: 5 }} />
+          <Divider sx={{ marginTop: 2 }} />
           <Grid container spacing={2} marginTop={2}>
             <Grid textAlign={"center"} item lg={12} xs={12}>
-              <Typography variant="h3"><b>Top Collection</b></Typography>
+              <Typography variant="h3"><b>Top Items</b></Typography>
             </Grid>
           </Grid>
-          <Grid marginTop={5} container spacing={2}>
+          <Grid marginTop={2} container spacing={2}>
             {data.map(({ title, code, price, imgUrl }, key) => (
               <Grid key={key} item md={3} lg={3} xs={6}>
                 <CardItem title={title} price={price + " ETH"} code={code} imgUrl={imgUrl} />

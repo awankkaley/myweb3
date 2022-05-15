@@ -1,12 +1,14 @@
 import type { NextPage } from 'next'
 // import { Layout, Modal, message, Col, Card, Row, Typography, Button } from 'antd';
 import { observer } from 'mobx-react-lite';
-import React, { useState, useLayoutEffect } from 'react';
-
+import React, { useState, useLayoutEffect, useEffect } from 'react';
+import { getNativeByChain } from "helpers/networks";
 import HeaderPanel from 'components/HeaderPanel';
 import { Avatar, Button, Card, CardMedia, Container, Dialog, Divider, Grid, List, ListItem, ListItemAvatar, ListItemText, Modal, Typography } from '@mui/material';
 import CardItem from 'components/molecules/CardItem';
-
+import { useMoralis, useMoralisQuery, useWeb3ExecuteFunction } from "react-moralis";
+import { useMoralisDapp } from "../../providers/MoralisDappProvider";
+import { useNFTTokenIds } from "hooks/useNFTTokenIds";
 
 const data = [
     {
@@ -39,6 +41,39 @@ const data = [
 
 const Explore = observer(() => {
     // const { Content, Footer } = Layout;
+    const { NFTTokenIds, totalNFTs, fetchSuccess } = useNFTTokenIds("0xb09a023cc03f1d07be09cb02e3d3e7fd4972a1b8");
+    const contractProcessor = useWeb3ExecuteFunction();
+    const { chainId, marketAddress, contractABI, walletAddress } =
+        useMoralisDapp();
+    const nativeName = getNativeByChain(chainId);
+    const contractABIJson = JSON.parse(contractABI);
+    const { Moralis } = useMoralis();
+    const queryMarketItems = useMoralisQuery("CreatedMarketItems");
+    const fetchMarketItems = JSON.parse(
+        JSON.stringify(queryMarketItems.data, [
+            "objectId",
+            "createdAt",
+            "price",
+            "nftContract",
+            "itemId",
+            "sold",
+            "tokenId",
+            "seller",
+            "owner",
+            "confirmed",
+        ])
+    );
+    const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } =
+        useMoralis();
+
+    useEffect(() => {
+        if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading) enableWeb3();
+    }, [isAuthenticated, isWeb3Enabled]);
+
+    useEffect(() => {
+        console.log(fetchMarketItems);
+
+    });
 
     return (
         <div >

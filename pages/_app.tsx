@@ -2,9 +2,10 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { observer } from 'mobx-react-lite';
 import Head from 'next/head'
-import { MoralisProvider } from 'react-moralis';
-import React from 'react';
+import { MoralisProvider, useMoralis } from 'react-moralis';
+import React, { useEffect } from 'react';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { MoralisDappProvider } from "../providers/MoralisDappProvider";
 import '@fontsource/space-grotesk/300.css';
 import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/500.css';
@@ -46,7 +47,6 @@ const MyApp = observer(({ Component, pageProps }: AppProps) => {
   const APP_ID = "U6c1sWGjNVgPDCsVjGIDOsRydLZ0k3dvaOsDf66U";
   const SERVER_URL = "https://9fwajutcjusc.usemoralis.com:2053/server";
 
-
   return (
     <>
       <Head>
@@ -57,9 +57,12 @@ const MyApp = observer(({ Component, pageProps }: AppProps) => {
       </Head>
 
       <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
-        <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <MoralisDappProvider>
+          <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </MoralisDappProvider>
+
       </MoralisProvider>
     </>
   );
